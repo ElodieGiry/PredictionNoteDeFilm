@@ -13,5 +13,5 @@ Création d'un réseau de neurones profond pour prédire les notes
 
 Utilisation du modèle Camembert pour prédire les notes
 
-## Fichier de formatage
+## Fichier de formatage pour évaluation sur Pedago
 Pour convertir le fichier contenant les notes prédites au format adéquat pour l'évaluation sur la plateforme Pedago (review_id note avec virgule /5)
