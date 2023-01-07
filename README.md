@@ -3,6 +3,9 @@ Projet prédiction notes de film Allo Ciné
 
 Ce projet a été réalisé par Elodie Giry et Lydia Soltani
 
+## Analyse descriptive
+Analyse descriptive et statistiques sur les données des commentaires
+
 ## SVM
 Création du dictionnaire contenant les mots des commentaires
 
