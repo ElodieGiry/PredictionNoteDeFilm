@@ -14,7 +14,7 @@ Création d'un réseau de neurones profond pour prédire les notes
 Utilisation du modèle Camembert pour prédire les notes
 
 ## Lexique sentimentale
-
+Calcul de la polarité de chaque commentaire à partir de la bibliothéque Python TextBlob
 Calcul de la polarité (positif, neutre et négatif) de chaque mot de chaque commentaire à partir d'un lexique sentimentale
 
  ## Méta données
