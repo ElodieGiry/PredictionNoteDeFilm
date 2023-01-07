@@ -17,5 +17,9 @@ Utilisation du modèle Camembert pour prédire les notes
 
 Calcul de la polarité (positif, neutre et négatif) de chaque mot de chaque commentaire à partir d'un lexique sentimentale
 
+ ## Méta données
+ 
+Moyenne et écart-type des notes de chaque utilisateurs présent dans le corpus de Train. Ensuite nous avons ajouté dans le SVM les moyennes et écart-type des utilisateurs qui étaient présents dans le corpus de train et de test. 
+
 ## Fichier de formatage pour évaluation sur Pedago
 Pour convertir le fichier contenant les notes prédites au format adéquat pour l'évaluation sur la plateforme Pedago (review_id note avec virgule /5)
