@@ -51,154 +51,154 @@ tabUserMeilleurNotation=dict()
 tabUserNbNotes=dict()
 
 tabContribution=[]
-#print("tab contribution et tab meilleure et pire notes")
+print("tab contribution et tab meilleure et pire notes")
 
 userAndNote = data
 userAndNote = userAndNote.drop(['movie', 'review_id','name','commentaire'], axis = 1)
-#compteNoteParUser = userAndNote.groupby('user_id')['note'].count()
+compteNoteParUser = userAndNote.groupby('user_id')['note'].count()
 
 #print(compteNoteParUser)
 
-#contribUser=str(compteNoteParUser).split()
+contribUser=str(compteNoteParUser).split()
 
-# i=1
-# listeContrib=[]
-# while contribUser[i] != "Name:":
-#     if contribUser[i]=="...":
-#         i=i+1
-#     else:
-#         print("dans while",contribUser[i+1])
-#         i=i+2
+i=1
+listeContrib=[]
+while contribUser[i] != "Name:":
+    if contribUser[i]=="...":
+        i=i+1
+    else:
+        print("dans while",contribUser[i+1])
+        i=i+2
     
 
-#print(listeContrib)
+print(listeContrib)
 
-#print(compteNoteParUser[:5])
+print(compteNoteParUser[:5])
 
-# cpt=0
-# for user in data["user_id"]: 
-#     cpt=cpt+1
-#     if cpt%1000==0:
-#         print("cpt",cpt)
-#     noteDuUser=data[data["user_id"]==user].note
-#     tabUserNbNotes[user]=len(noteDuUser)   
-#     tabContribution.append(len(noteDuUser))   
+cpt=0
+for user in data["user_id"]: 
+    cpt=cpt+1
+    if cpt%1000==0:
+        print("cpt",cpt)
+    noteDuUser=data[data["user_id"]==user].note
+    tabUserNbNotes[user]=len(noteDuUser)   
+    tabContribution.append(len(noteDuUser))   
     
-#     #print("note du user ",noteDuUser)
+    #print("note du user ",noteDuUser)
     
-#     #print("split :")
-#     tabNotes=str(noteDuUser).split()
-#     #print("tabNotes",tabNotes)
+    #print("split :")
+    tabNotes=str(noteDuUser).split()
+    #print("tabNotes",tabNotes)
     
-#     i=0
-#     #print("user",user)
-#     tabNotesMoy=[]
-#     while tabNotes[i] != "Name:":
-#         if tabNotes[i]=="...":
-#             i=i+1
-#         else:
-#             #print(tabNotes[i],"pas égal à name")
-#             #print(i)
-#             #print(tabNotes[i+1])
+    i=0
+    #print("user",user)
+    tabNotesMoy=[]
+    while tabNotes[i] != "Name:":
+        if tabNotes[i]=="...":
+            i=i+1
+        else:
+            #print(tabNotes[i],"pas égal à name")
+            #print(i)
+            #print(tabNotes[i+1])
             
-#             tabNotesMoy.append(tabNotes[i+1])
-#             i=i+2
+            tabNotesMoy.append(tabNotes[i+1])
+            i=i+2
             
-#     somme=0
-#     for note in tabNotesMoy:
-#         #print(type(note))  
-#         note=float(note)
-#         #print(type(note))  
-#         somme=somme+note
+    somme=0
+    for note in tabNotesMoy:
+        #print(type(note))  
+        note=float(note)
+        #print(type(note))  
+        somme=somme+note
        
-#     moy=somme/len(tabNotesMoy)
+    moy=somme/len(tabNotesMoy)
         
-#     #print("tabNotesMoy de ",user,moy)    
-#     #print("pour note",tabNotesMoy)
+    #print("tabNotesMoy de ",user,moy)    
+    #print("pour note",tabNotesMoy)
     
 
-#     tabUserMeilleurNotation[user]=moy
-#     #print(tabUserMeilleurNotation)
+    tabUserMeilleurNotation[user]=moy
+    #print(tabUserMeilleurNotation)
     
-#     tabUserMeilleurNotationTrie= sorted(tabUserMeilleurNotation.items(), key=operator.itemgetter(1),reverse=True)
-#     #meilleurs note
-#     tabUserMeilleurNotation10 = list(tabUserMeilleurNotationTrie)[:10]
-#     #pires notes
-#     tabUserPireNotation10 = list(tabUserMeilleurNotationTrie)[10:]
+    tabUserMeilleurNotationTrie= sorted(tabUserMeilleurNotation.items(), key=operator.itemgetter(1),reverse=True)
+    #meilleurs note
+    tabUserMeilleurNotation10 = list(tabUserMeilleurNotationTrie)[:10]
+    #pires notes
+    tabUserPireNotation10 = list(tabUserMeilleurNotationTrie)[10:]
  
-# print("tabContribution ", tabContribution)
-# print("avant boite moustache")
+print("tabContribution ", tabContribution)
+print("avant boite moustache")
     
-# plt.boxplot(tabContribution)
-# #plt.ylim(0,5)
-# plt.title("Distribution du nombre de contributions")
-# plt.savefig('analyse/boiteMoustacheContribution.png')
-# plt.show()   
+plt.boxplot(tabContribution)
+#plt.ylim(0,5)
+plt.title("Distribution du nombre de contributions")
+plt.savefig('analyse/boiteMoustacheContribution.png')
+plt.show()   
  
     
-# print("10 utilisateurs ayant mis les meilleures notes :")
-# print(tabUserMeilleurNotation10)
-# print("10 utilisateurs ayant mis les pires notes :")
-# print(tabUserPireNotation10)
+print("10 utilisateurs ayant mis les meilleures notes :")
+print(tabUserMeilleurNotation10)
+print("10 utilisateurs ayant mis les pires notes :")
+print(tabUserPireNotation10)
 
 
-# print("tabUserNbNotes[user]",tabUserNbNotes)
-# tabUserNbNotesTrie= sorted(tabUserNbNotes.items(), key=operator.itemgetter(1),reverse=True)
+print("tabUserNbNotes[user]",tabUserNbNotes)
+tabUserNbNotesTrie= sorted(tabUserNbNotes.items(), key=operator.itemgetter(1),reverse=True)
 
-# print("tabUserNbNotesTrie",tabUserNbNotesTrie)
+print("tabUserNbNotesTrie",tabUserNbNotesTrie)
 
-# meilleurContributeur = list(tabUserNbNotesTrie)[0]
-# print("meilleurContributeur = ",meilleurContributeur)
+meilleurContributeur = list(tabUserNbNotesTrie)[0]
+print("meilleurContributeur = ",meilleurContributeur)
 
-# meilleurContributeur=str(meilleurContributeur).split('\'')
+meilleurContributeur=str(meilleurContributeur).split('\'')
 
-# notemeilleurContributeur=data[data["user_id"]==meilleurContributeur[1]].note
-# print("key=",notemeilleurContributeur)
+notemeilleurContributeur=data[data["user_id"]==meilleurContributeur[1]].note
+print("key=",notemeilleurContributeur)
 
-# tabNotes=str(notemeilleurContributeur).split()
-# i=0
-# listeNoteMeilleurContributeur=[]
-# while tabNotes[i] != "Name:":
-#     if tabNotes[i]=="...":
-#         i=i+1
-#     else:
-#         listeNoteMeilleurContributeur.append(tabNotes[i+1])
-#         i=i+2
-# print("Liste note de meilleur contributeur",listeNoteMeilleurContributeur)
+tabNotes=str(notemeilleurContributeur).split()
+i=0
+listeNoteMeilleurContributeur=[]
+while tabNotes[i] != "Name:":
+    if tabNotes[i]=="...":
+        i=i+1
+    else:
+        listeNoteMeilleurContributeur.append(tabNotes[i+1])
+        i=i+2
+print("Liste note de meilleur contributeur",listeNoteMeilleurContributeur)
 
-# listeNoteMeilleurContributeurFloat=[]
-# for note in listeNoteMeilleurContributeur: 
-#     listeNoteMeilleurContributeurFloat.append(float(note))
+listeNoteMeilleurContributeurFloat=[]
+for note in listeNoteMeilleurContributeur: 
+    listeNoteMeilleurContributeurFloat.append(float(note))
 
-# #boite = [listeNoteMeilleurContributeurFloat,listeNoteMeilleurContributeurFloat]
+#boite = [listeNoteMeilleurContributeurFloat,listeNoteMeilleurContributeurFloat]
 
-# plt.boxplot(listeNoteMeilleurContributeurFloat)
-
-
-# plt.ylim(0,5)
-# plt.title("Distribution des notes du meilleur contributeur")
-# plt.savefig('analyse/boiteMoustacheMeilleurContributeur.png')
-# plt.show()
+plt.boxplot(listeNoteMeilleurContributeurFloat)
 
 
+plt.ylim(0,5)
+plt.title("Distribution des notes du meilleur contributeur")
+plt.savefig('analyse/boiteMoustacheMeilleurContributeur.png')
+plt.show()
 
-###############################################################################
-# Lydia test stopwords
-###############################################################################
-# try:
-#     french_stopwords = set(stopwords.words('french'))
-# except LookupError:
-#     import nltk
-#     nltk.download('stopwords')
-#     stopwords = set(stopwords.words('french'))
-# filtre_stopfr =  lambda text: [token for token in text if token.lower() not in french_stopwords]
-# data['commentaire'] = [' '.join(filtre_stopfr(word_tokenize(item))) for item in data['commentaire']]
-# print("filtrer")
-# print(data["commentaire"])
 
-#Statistique de base sur les notes
-#noteData = data['note']
-#print(data.dtypes)
+
+##############################################################################
+Lydia test stopwords
+##############################################################################
+try:
+    french_stopwords = set(stopwords.words('french'))
+except LookupError:
+    import nltk
+    nltk.download('stopwords')
+    stopwords = set(stopwords.words('french'))
+filtre_stopfr =  lambda text: [token for token in text if token.lower() not in french_stopwords]
+data['commentaire'] = [' '.join(filtre_stopfr(word_tokenize(item))) for item in data['commentaire']]
+print("filtrer")
+print(data["commentaire"])
+
+Statistique de base sur les notes
+noteData = data['note']
+print(data.dtypes)
 
 #TF IDF dictionnaire
 ###############################################################################
@@ -307,27 +307,27 @@ def frequenceData():
 ###############################################################################
 # Statistiques de base 
 ###############################################################################
-# def statistiqueBase():
-#     #Note minimale
-#     noteMin = noteData.min()
-#     print("Note minimale : ",noteMin)
+def statistiqueBase():
+    #Note minimale
+    noteMin = noteData.min()
+    print("Note minimale : ",noteMin)
     
-#     #Note maximale
-#     noteMax = noteData.max()
-#     print("Note maximale : ",noteMax)
+    #Note maximale
+    noteMax = noteData.max()
+    print("Note maximale : ",noteMax)
     
-#     #Note médiane
-#     noteMedians = noteData.median()
-#     print("Note médiane : ",noteMedians)
+    #Note médiane
+    noteMedians = noteData.median()
+    print("Note médiane : ",noteMedians)
     
-#     #Note moyenne
-#     noteMoyenne= noteData.mean()
-#     print("Note moyenne : ",noteMoyenne)
+    #Note moyenne
+    noteMoyenne= noteData.mean()
+    print("Note moyenne : ",noteMoyenne)
     
-#     #Note moyenne
-#     noteLaPlusFrequente = noteData.mode()
-#     print("Note la plus fréquente : ")
-#     print(noteLaPlusFrequente)
+    #Note moyenne
+    noteLaPlusFrequente = noteData.mode()
+    print("Note la plus fréquente : ")
+    print(noteLaPlusFrequente)
     
 ###############################################################################
 # Graphique nuage de mots les plus fréquents
@@ -440,58 +440,58 @@ def test():
     plt.close() 
 #test()
 
-#def boiteMoustacheNotes():
+def boiteMoustacheNotes():
     
-    # note = data[data["note"] == i/2]
-    # #Récupère le commentaire associé à la note
-    # commentaireNote = note['commentaire'].astype(str).map(len)
-    # commentaireNote = commentaireNote.mean()
+    note = data[data["note"] == i/2]
+    #Récupère le commentaire associé à la note
+    commentaireNote = note['commentaire'].astype(str).map(len)
+    commentaireNote = commentaireNote.mean()
     
-    #notes d'un user
+    notes d'un user
 
     
-#     print("dans boite moustache")
-#     data = [1,2,3,4,5,6,7,8,9]
+    print("dans boite moustache")
+    data = [1,2,3,4,5,6,7,8,9]
     
-#     plt.boxplot(data)
+    plt.boxplot(data)
     
-#     plt.ylim(0,10)
+    plt.ylim(0,10)
     
-#     plt.savefig('analyse/boiteMoustacheNotes.png')
-#     plt.show()
-# boiteMoustacheNotes()
+    plt.savefig('analyse/boiteMoustacheNotes.png')
+    plt.show()
+boiteMoustacheNotes()
 ###############################################################################
 # Fonction qui affiche l'histogramme de la fréquence user, loi Normale
 ###############################################################################
-# import scipy
-# import scipy.stats
-# bins=500
-# frequenceUtilisateur = data['user_id'].value_counts()
-# y, x = np.histogram(frequenceUtilisateur, bins=bins, density=True)
-# # Milieu de chaque classe
-# x = (x + np.roll(x, -1))[:-1] / 2.0
+import scipy
+import scipy.stats
+bins=500
+frequenceUtilisateur = data['user_id'].value_counts()
+y, x = np.histogram(frequenceUtilisateur, bins=bins, density=True)
+# Milieu de chaque classe
+x = (x + np.roll(x, -1))[:-1] / 2.0
 
-# dist_name = "gamma"
+dist_name = "gamma"
 
-# # Paramètres de la loi
-# dist = getattr(scipy.stats, dist_name)
+# Paramètres de la loi
+dist = getattr(scipy.stats, dist_name)
 
-# # Modéliser la loi
-# param = dist.fit(frequenceUtilisateur)
+# Modéliser la loi
+param = dist.fit(frequenceUtilisateur)
 
-# loc = param[-2]
-# scale = param[-1]
-# arg = param[:-2]
+loc = param[-2]
+scale = param[-1]
+arg = param[:-2]
 
-# pdf = dist.pdf(x, loc=loc, scale=scale, *arg)
+pdf = dist.pdf(x, loc=loc, scale=scale, *arg)
 
-# plt.figure(figsize=(12,8))
-# plt.plot(x, pdf, label=dist_name, linewidth=3) 
+plt.figure(figsize=(12,8))
+plt.plot(x, pdf, label=dist_name, linewidth=3) 
 
-# plt.legend()
-# plt.show()
-# plt.savefig('fig/frequenceUtilisateur')
-# plt.close()   
+plt.legend()
+plt.show()
+plt.savefig('fig/frequenceUtilisateur')
+plt.close()   
 
 print("---------------------------------------------------------------------")
 print("Main : Statistiques sur les commentaires des films Allo Ciné")
