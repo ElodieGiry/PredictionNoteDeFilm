@@ -39,13 +39,12 @@ stopword=["de","et","le","qui","à", "la", "un", "les", "pas", "que", "ce","en",
 print("avant read_xml")
 #Récupération des données train sur les commentaires de films
 
-#data = pd.read_xml("train.xml")
 data = pd.read_xml("test.xml")
 print("après read_xml")
 
 #Transformation des virgules en points pour avoir les notes 
 #en format float pour les statistiques
-#data['note'] = data['note'].str.replace(',','.').astype(float)
+data['note'] = data['note'].str.replace(',','.').astype(float)
 
 tabUserMeilleurNotation=dict()
 tabUserNbNotes=dict()
@@ -57,8 +56,6 @@ userAndNote = data
 userAndNote = userAndNote.drop(['movie', 'review_id','name','commentaire'], axis = 1)
 compteNoteParUser = userAndNote.groupby('user_id')['note'].count()
 
-#print(compteNoteParUser)
-
 contribUser=str(compteNoteParUser).split()
 
 i=1
@@ -69,8 +66,7 @@ while contribUser[i] != "Name:":
     else:
         print("dans while",contribUser[i+1])
         i=i+2
-    
-
+   
 print(listeContrib)
 
 print(compteNoteParUser[:5])
@@ -84,41 +80,25 @@ for user in data["user_id"]:
     tabUserNbNotes[user]=len(noteDuUser)   
     tabContribution.append(len(noteDuUser))   
     
-    #print("note du user ",noteDuUser)
-    
-    #print("split :")
     tabNotes=str(noteDuUser).split()
-    #print("tabNotes",tabNotes)
     
     i=0
-    #print("user",user)
     tabNotesMoy=[]
     while tabNotes[i] != "Name:":
         if tabNotes[i]=="...":
             i=i+1
         else:
-            #print(tabNotes[i],"pas égal à name")
-            #print(i)
-            #print(tabNotes[i+1])
-            
             tabNotesMoy.append(tabNotes[i+1])
             i=i+2
             
     somme=0
     for note in tabNotesMoy:
-        #print(type(note))  
-        note=float(note)
-        #print(type(note))  
+        note=float(note) 
         somme=somme+note
        
     moy=somme/len(tabNotesMoy)
-        
-    #print("tabNotesMoy de ",user,moy)    
-    #print("pour note",tabNotesMoy)
-    
 
     tabUserMeilleurNotation[user]=moy
-    #print(tabUserMeilleurNotation)
     
     tabUserMeilleurNotationTrie= sorted(tabUserMeilleurNotation.items(), key=operator.itemgetter(1),reverse=True)
     #meilleurs note
@@ -130,17 +110,14 @@ print("tabContribution ", tabContribution)
 print("avant boite moustache")
     
 plt.boxplot(tabContribution)
-#plt.ylim(0,5)
 plt.title("Distribution du nombre de contributions")
 plt.savefig('analyse/boiteMoustacheContribution.png')
 plt.show()   
  
-    
 print("10 utilisateurs ayant mis les meilleures notes :")
 print(tabUserMeilleurNotation10)
 print("10 utilisateurs ayant mis les pires notes :")
 print(tabUserPireNotation10)
-
 
 print("tabUserNbNotes[user]",tabUserNbNotes)
 tabUserNbNotesTrie= sorted(tabUserNbNotes.items(), key=operator.itemgetter(1),reverse=True)
@@ -169,18 +146,12 @@ print("Liste note de meilleur contributeur",listeNoteMeilleurContributeur)
 listeNoteMeilleurContributeurFloat=[]
 for note in listeNoteMeilleurContributeur: 
     listeNoteMeilleurContributeurFloat.append(float(note))
-
-#boite = [listeNoteMeilleurContributeurFloat,listeNoteMeilleurContributeurFloat]
-
 plt.boxplot(listeNoteMeilleurContributeurFloat)
-
 
 plt.ylim(0,5)
 plt.title("Distribution des notes du meilleur contributeur")
 plt.savefig('analyse/boiteMoustacheMeilleurContributeur.png')
 plt.show()
-
-
 
 ##############################################################################
 Lydia test stopwords
@@ -241,19 +212,12 @@ def repetitionMot(sacDeMot):
     print("repetitionMot")
     #for mots in tqdm(sacDeMot,desc="la liste des mots"): 
     for mot in sacDeMot:
-        #print("On cherche mot:",mot)
         
         if mot in wordsOccurences:
-            #print("mot trouvé",mot)
             wordsOccurences[mot] += 1
-            #print("wordsOccurences[mot]",wordsOccurences[mot])
-            #print(wordsOccurences)
         else:
             wordsOccurences[mot] = 1
-            #print("mot non trouvé",wordsOccurences[mot])
-                
-    #print("wordsOccurences dict après ")
-    #print(wordsOccurences)
+            
     return wordsOccurences
 
 ###############################################################################
@@ -278,8 +242,6 @@ def repet(dictionnaireParNote):
     for element in listeRepet:
         x=listeRepet.count(element)
         nbRepet.append(x)
-
-    #print("test nb", nbRepet)
                      
 #repet(sacDeMotParNote(5))
 
@@ -293,16 +255,16 @@ def frequenceData():
         l.append(user)
         cpt+=1
     
-    #print("Liste utilisateurs de base")
-    #print(l)
-    #print("Nombre utilisateurs de base")
-    #print(cpt)
-    #print("Nouvelle liste sans doublons et nombre")
-    #test=Counter(l).keys()
-    #print(test)
+    print("Liste utilisateurs de base")
+    print(l)
+    print("Nombre utilisateurs de base")
+    print(cpt)
+    print("Nouvelle liste sans doublons et nombre")
+    test=Counter(l).keys()
+    print(test)
     print("nb comemntaire",cpt)
     print("nb de user " ,len(l))
-    #print(Counter(l).values())
+    print(Counter(l).values())
     
 ###############################################################################
 # Statistiques de base 
@@ -340,12 +302,9 @@ def nuageDeMot():
         motDico=[]
         dictionnaireParNote= sacDeMotParNote(i/2)
         #dictionnaireParNote= sacDeMotParNote(0.5)
-        #print("len dictionnaire",len(dictionnaireParNote))
         
         #Découpage des commentaires en mots et ajout dans le dictionnaire
         for mot in dictionnaireParNote:
-            #print("mot")
-            #print(mot)
             for mot1 in mot :
                 if mot1 not in stopword and mot1 not in stopwordsLibrairie and len(mot1)>1:
                     motDico.append(mot1)
@@ -390,17 +349,9 @@ def histogrammeTailleCommentaireMoyenParNote():
         #Récupère le commentaire associé à la note
         
         commentaire =note['commentaire']
-        print("***commentaire : note",i/2, commentaire)
-        
-        print("--------------------------------")
-        #str(commentaire).split("")
-        #print(commentaire[0])
-        
         commentaireNote = note['commentaire'].astype(str).map(len)
         commentaireNote = commentaireNote.mean()
         tailleCommentaire.append(commentaireNote)
-        #print("Taille commentaire pour note ",i/2, ":",commentaireNote)
-    #print("tailleCommentaire : ",len(tailleCommentaire))
     
     notes = ('0','0.5','1','1.5','2','2.5','3','3.5','4','4.5','5')
     y_pos = np.arange(len(notes))
@@ -447,9 +398,7 @@ def boiteMoustacheNotes():
     commentaireNote = note['commentaire'].astype(str).map(len)
     commentaireNote = commentaireNote.mean()
     
-    notes d'un user
-
-    
+    #notes d'un user
     print("dans boite moustache")
     data = [1,2,3,4,5,6,7,8,9]
     
