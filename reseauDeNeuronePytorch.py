@@ -138,6 +138,8 @@ for batch, (X, y) in enumerate(test_dataloader):
     # Compute prediction and loss
     pred = model(X)
     print("pred test = ",pred)
+    
+    #Récupère la note prédite (proba la plus grande)
     y_pred = pred.argmax(dim=1)
     print("y_pred = ", y_pred)
     
@@ -145,4 +147,3 @@ for batch, (X, y) in enumerate(test_dataloader):
     
     print((int(noteFormate[8])+1))
     
-    #ypred +1
