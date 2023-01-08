@@ -7,15 +7,9 @@ from transformers import CamembertForSequenceClassification, CamembertTokenizer,
 import numpy as np
 
 # Chargement du jeu de donnees
-#dataset = pd.read_csv("reviews_allocine_classification.csv")
 data = pd.read_xml("train_Extrait.xml")
- 
-#reviews = dataset['review'].values.tolist()
-#sentiments = dataset['sentiment'].values.tolist()
 
 commentairesTrain = data['commentaire']
-#notes = data['note'].str.replace(',','.').astype(float).to_numpy()
-#notes = data['note']
 
 data["note"] = data["note"].apply(lambda x: x.replace(",", "."))
 rates = data["note"].values.tolist()
@@ -26,10 +20,8 @@ for rate in rates:
 #notes = torch.tensor(list_rates).cuda()
 notes = torch.tensor(list_rates)
  
-
 data = pd.read_xml("test_Extrait.xml")
 commentairesTest = data['commentaire']
-
 
 # On charge l'objet "tokenizer"de camemBERT qui va servir a encoder
 # 'camebert-base' est la version de camembert qu'on choisit d'utiliser
@@ -54,12 +46,6 @@ encoded_batch = TOKENIZER.batch_encode_plus(commentairesTrain,
 # On utilise 80% du jeu de donnée pour l'entrainement et les 20% restant pour la validation
 #split_border = int(len(commentairesTrain)*0.8)
  
- 
-# train_dataset = TensorDataset(
-#     encoded_batch['input_ids'],
-#     encoded_batch['attention_mask'],
-#     notes)
-
 train_dataset = TensorDataset(  # train.xml
     encoded_batch['input_ids'],
     encoded_batch['attention_mask'],
@@ -70,27 +56,14 @@ train_dataset = TensorDataset(  # train.xml
 #     encoded_batch['attention_mask'][split_border:],
 #     notes[split_border:])
  
- 
 batch_size = 2
- 
-# On cree les DataLoaders d'entrainement et de validation
-# Le dataloader est juste un objet iterable
-# On le configure pour iterer le jeu d'entrainement de façon aleatoire et creer les batchs.
-# train_dataloader = DataLoader(
-#             train_dataset,
-#             sampler = RandomSampler(train_dataset),
-#             batch_size = batch_size)
+       batch_size = batch_size)
  
 train_dataloader = DataLoader(
             train_dataset,
             # sampler = RandomSampler(train_dataset),
             shuffle=True, # ! ca fait pareil que le truc d au dessus mais c'est plus explicite je trouve
             batch_size = batch_size)
-
-# validation_dataloader = DataLoader(
-#             validation_dataset,
-#             sampler = SequentialSampler(validation_dataset),
-#             batch_size = batch_size)
 
 # On la version pre-entrainee de camemBERT 'base'
 model = CamembertForSequenceClassification.from_pretrained('camembert-base',num_labels = 10)
