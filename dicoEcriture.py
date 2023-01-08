@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 #Lit fichier train et ecrit le dictionnaire correspondant
-#TODO: dico à modifier (accent, maj, ", ', stopword, tokenisation)
-
 import unidecode #supprime accents
 
 fileIn="trainExtrait.xml"
@@ -48,18 +46,7 @@ with open(fileIn, 'r', encoding='utf8') as fichier:
         for mot in listeMotsCommentaire:
     
             motSansAccent = unidecode.unidecode(mot.lower())
-            #print("mot de base = ",motSansAccent)    
-                    
-            # nouveauMot=""
-            # for caractere in motSansAccent :
-            #     if caractere not in listeCaractere :
-            #         nouveauMot = nouveauMot + caractere
-            #     else : 
-            #         nouveauMot = nouveauMot + " "
-            
-            # listeMot= nouveauMot.split()
-            #print("split = ",listeMot)
-            
+           
             for mot in listeMotsCommentaire:
             #for mot in listeMot :
                 if len(mot) >1 and mot not in stopwords:
