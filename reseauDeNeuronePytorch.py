@@ -96,6 +96,7 @@ training_data = CustomImageDataset(svm_file_train)
 train_dataloader = DataLoader(training_data, batch_size=1)
 loss_fn = nn.CrossEntropyLoss()
 
+#Création du modèle de réseau de neurones
 model=NeuralNetwork()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 #print("avant train loop") 
