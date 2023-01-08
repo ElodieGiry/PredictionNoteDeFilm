@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import unidecode #supprime accents
 dicoTrain="dicoTrainMovie.txt"
 fileTest="test.xml"
@@ -20,7 +19,6 @@ stopwords = ['ai', 'alors', 'au', 'aucuns', 'aussi', 'autre', 'aux', 'avant', 'a
              'pourquoi', 'quand', 'que', 'quel', 'quelle', 'quelles', 'quels', 'qui', 'sa', 'sans', 'se', 'ses', 
              'seulement', 'si', 'sien', 'son', 'sont', 'sous', 'soyez', 'sujet', 'sur', 'ta', 'tandis', 'tellement', 
              'tels', 'tes', 'ton', 'tous', 'tout', 'tres', 'trop', 'tu', 'un', 'une', 'voient', 'vont', 'votre', 'vous', 'vu']
-
 
 #Etape 1 lecture dictionnaire
 dictionnaireUnique=dict()
@@ -57,20 +55,13 @@ with open(fileTest, 'r', encoding='utf8') as fichier:
             commentaire = commentaire+fichier.readline()
         commentaire = commentaire[14:-15]
         finBloc = fichier.readline()
-        bloc = fichier.readline()
-        
-
-        
-        
+        bloc = fichier.readline()   
         listeMotsCommentaire=commentaire.split()
-        #listeMotsCommentaire=nouveauCommentaireNettoye.split()
         
         nouvelleListeMot=[]
         for mot in listeMotsCommentaire : 
            nouvelleListeMot.append(mot)
-        
-        
-        #print('2',listeMotsCommentaire)
+      
         listeMotsCommentaireSansDoublon = list(set(nouvelleListeMot))
         
         ligneSVMListe=[]
@@ -79,7 +70,6 @@ with open(fileTest, 'r', encoding='utf8') as fichier:
             occurence=nouvelleListeMot.count(mot)         
             
             indice=dictionnaireUnique.get(mot,0)
-            #print("mot cherché",mot,"indice",indice)
             if(indice!=0):
                 indexOccurence=[]
                 indexOccurence.append(indice)
@@ -91,7 +81,6 @@ with open(fileTest, 'r', encoding='utf8') as fichier:
                 svmNonTrouve.write(mot+"\n")
 
         ligneSVMListe.sort()
-        
         ligneSVMtmp="1"
         for ligne in ligneSVMListe:
             ligneSVMtmp=ligneSVMtmp+" "+str(ligne[0])+":"+str(ligne[1])
