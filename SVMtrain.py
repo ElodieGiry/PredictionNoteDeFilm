@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import unidecode #supprime accents
 
-#dicoTrain="dicoTrain.svm"
 dicoTrain="dicoTrainMovie.txt"
 fileTest="train.xml"
 fileSVMNonTrouve="trainMovie.txt"
@@ -61,15 +60,10 @@ with open(fileTest, 'r', encoding='utf8') as fichier:
         while commentaire[-15:]!="</commentaire>\n":
             commentaire = commentaire+fichier.readline()
         commentaire = commentaire[14:-15]
-        
-        if nbCom == 106077: 
-            print("------------------------------------------------")
-            print("commentaire avant transformation =",commentaire)
-        
-        #print("commentaire  de base = ",commentaire)
+
         finBloc = fichier.readline()
         bloc = fichier.readline()
-        
+      
         listeMot=commentaire.split()
         
         nouvelleListeMot=[]
@@ -83,16 +77,10 @@ with open(fileTest, 'r', encoding='utf8') as fichier:
         for mot in listeMotsCommentaireSansDoublon:           
             occurence=nouvelleListeMot.count(mot)    
            
-            
-            #mettre mot sans MAJ , accents
-            #print("---------------------------------------------------")
-            #print("mot cherché : ",mot)
-            
             indice=dictionnaireUnique.get(mot,0)
             if nbCom == 106077:
                 print("mot  =",mot,"indice = ",indice,"occurence = ",occurence)
             
-            #print("mot cherché",mot,"indice",indice)
             if(indice!=0):
                 indexOccurence=[]
                 indexOccurence.append(indice)
@@ -102,13 +90,11 @@ with open(fileTest, 'r', encoding='utf8') as fichier:
                 ligneSVMListe.append(indexOccurence)
                 
                 nbMotTrouve=nbMotTrouve+1
-                #print("trouvé")
+         
             else:
                 nbMotPasTrouve=nbMotPasTrouve+1
                 svmNonTrouve.write(mot+"\n")
-                #print("pas trouvé")
-        #print("----------------------------------------------------")
-
+               
         ligneSVMListe.sort()
         
         ligneSVMtmp=str(int(note))
